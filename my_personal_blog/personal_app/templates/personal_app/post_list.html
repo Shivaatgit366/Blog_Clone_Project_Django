@@ -1,0 +1,34 @@
+{% extends "personal_app/base.html" %}
+
+{% block content %}
+
+<div class="centerstage">
+    {% for post_object in list_of_post_objects %}
+    <div class="post">
+        <h1><a href="{% url 'personal_app:post_detail' pk=post_object.pk %}">{{ post_object.title }}</a></h1>
+        <div class="date">
+            <p>Published on: {{ post_object.published_date|date:"D M Y" }}</p>
+        </div>
+
+
+        {% if post_object.approve_comments.count == 0 %}
+            <a href="{% url 'personal_app:post_detail' pk=post_object.pk %}">No Approved Comments; Comments will be displayed on approval</a>
+        {% else %}
+            <a href="{% url 'personal_app:post_detail' pk=post_object.pk %}">Comments: {{ post_object.approve_comments.count }}</a>
+        {% endif %}
+        <br>
+        <br>
+    </div>
+    {% endfor %}
+</div>
+
+<div>
+    {% if not list_of_post_objects %}
+        <br>
+        <br>
+        <h2>No Posts are published yet!</h2>
+    {% endif %}
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,25 @@
+{% extends "personal_app/base.html" %}
+
+{% block content %}
+    <ol class="draftlist">
+    {% for post_object in list_of_draft_objects %}
+        {% if not post_object.published_date %}
+        <h4>
+            <li class="post">
+                <h2><a href="{% url 'personal_app:post_detail' pk=post_object.pk %}">{{ post_object.title }}</a></h2>
+                <p class="date">created on: {{ post_object.created_date|date:"d-m-Y" }}</p>
+                <p>{{ post_object.body|safe|linebreaksbr|truncatechars:200 }}</p>
+            </li>
+        </h4>
+        {% endif %}
+    {% endfor %}
+    </ol>
+
+    
+    {% if not list_of_draft_objects %}
+        <div class="post jumbotron">
+            <h1>No drafts yet!!</h1>
+        </div>
+    {% endif %}
+
+{% endblock %}

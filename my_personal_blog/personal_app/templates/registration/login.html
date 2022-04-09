@@ -1,0 +1,30 @@
+{% extends "personal_app/base.html" %}
+
+
+<!DOCTYPE html>
+
+
+{% block content %}
+<div class="jumbotron">
+    <h2>Please Login:</h2>
+    <h3>(Must be a user from the "auth_user" table(these users can be SuperUsers), Please check with the site Admin)</h3>
+
+    {% if form.errors %}
+        <p>Your username and password didn't match!! Please try again.</p>
+    
+    {% else %}
+        <form action="{% url 'user_login' %}" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    {% endif %}
+    
+    <br>
+
+    <a class="btn btn-primary btn-lg" href="{% url 'personal_app:register' %}" role="button">Register</a>
+
+</div>
+{% endblock %}
+

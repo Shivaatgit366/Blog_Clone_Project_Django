@@ -1,0 +1,67 @@
+{% extends "personal_app/base.html" %}
+
+{% block content %}
+    
+    <!-- "post_object" is taken from the post_list.html; In that file we have named the post object. -->
+
+    <h1 class="posttitle loader">{{ post_object.title }}</h1>
+    {% if post_object.published_date %}
+        <div class="date postdate">
+            published on: {{ post_object.published_date }}
+            <br>
+            author: {{ post_object.author }}
+        </div>
+
+    {% else %}
+        <a class="btn btn-default" href="{% url 'personal_app:publish_post' pk=post_object.pk %}">Publish</a>
+
+    {% endif %}
+
+    <p class="postcontent">{{ post_object.body|safe|linebreaksbr }}</p>
+    
+
+    {% if user.is_authenticated %}
+        <a class="btn btn-primary" href="{% url 'personal_app:post_update' pk=post_object.pk %}">Update
+            <span class="glyphicon glyphicon-pencil"></span>
+        </a>
+
+        <a class="btn btn-primary" href="{% url 'personal_app:post_delete' pk=post_object.pk %}">Delete
+            <span class="glyphicon glyphicon-remove"></span>
+        </a>
+    {% endif %}
+
+
+    <hr>
+
+    <a class="btn btn-primary btn-comment" href="{% url 'personal_app:add_comment' pk=post_object.pk %}">Add Comment</a>
+    
+    <br>
+    <br>
+
+    <div class="container">
+        {% for comment_object in post_object.comments.all %}
+        
+        <br>
+
+            {% if comment_object.approved_comment %}
+            {{ comment_object.created_date }}
+            <p>{{ comment_object.text|safe|linebreaksbr }}</p>
+            <p>Posted By: {{ comment_object.author }}</p>
+            {% endif %}
+
+
+            {% if user.is_authenticated %}
+                {% if not comment_object.approved_comment %}
+                    {{ comment_object.created_date }}
+                    <p>{{ comment_object.text|safe|linebreaksbr }}</p>
+                    <p>Posted By: {{ comment_object.author }}</p>
+                    <a class="btn btn-primary" href="{% url 'personal_app:remove_comment' pk=comment_object.pk %}">Remove Comment<span class="glyphicon glyphicon-remove"></span></a>
+                    <a class="btn btn-primary" href="{% url 'personal_app:approve_comment' pk=comment_object.pk %}">Approve Comment<span class="glyphicon glyphicon-ok"></span></a>
+                {% endif %}
+            {% endif %}
+
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Blog</title>
+
+    <!-- medium style editor -->
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+
+    {# custom CSS, it is our local CSS file; Whenever we use static url, we should put template tag comment, not the common comment symbol, otherwise we get error #}
+    <link rel="stylesheet" href="{% static 'css/blogpost.css' %}">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Russo+One&display=swap" rel="stylesheet">
+
+</head>
+
+
+<body class="loader">
+
+    <nav class="navbar navbar-expand-lg techfont custom-navbar bg-light">
+        <a class="navbar-brand bigbrand" href="{% url 'personal_app:post_list' %}">My Tech blog</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'personal_app:about'%}" target="_blank">About<span class="sr-only"></span></a>
+            </li>
+
+            <li class="nav-item active">
+                <a class="nav-link" href="https://github.com/Shivaatgit366" target="_blank">Github<span class="sr-only"></span></a>
+            </li>
+            
+            <li class="nav-item active">
+                <a class="nav-link" href="https://docs.google.com/document/d/1BJ2tGzyt4ZgK3CnZeQY2NCwJpG01EgwbsR-AElERyr0/edit?usp=sharing" target="_blank">Google Doc<span class="sr-only"></span></a>
+            </li>
+        </ul>
+        
+        
+        <ul class="navbar-nav justify-content-end">
+        {% if user.is_authenticated %}
+            <li class="nav-item active"><a href="{% url 'personal_app:post_create' %}">New Post</a></li>
+            <li class="nav-item active"><a href="{% url 'personal_app:draft_list' %}">Drafts</a></li>
+            <li class="nav-item active"><a href="{% url 'user_logout' %}" >Log out</a></li>
+            <li class="nav-item active"><a >Welcome: {{ user.username }}</a></li>
+        
+        {% else %}
+            <li class="nav-item active"><a href="{% url 'user_login' %}" >Login/Register<span class="glyphicon glyphicon-user"></span></a></li>
+        {% endif %}
+        </ul>
+
+        </div>
+
+    </nav>
+
+
+    <!-- content block -->
+    {# The actual blog posts#}
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+
+                <div class="blog_posts">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
+
