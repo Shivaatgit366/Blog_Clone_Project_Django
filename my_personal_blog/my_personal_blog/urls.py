@@ -20,7 +20,7 @@ from django.contrib.auth import views as auth_views
 from personal_app import views
 
 
-# Remember:- urls "127.0.0.1:8000" and "127.0.0.1:8000/"" are same. This is the domain name.
+# Remember:- urls "127.0.0.1:8000" and "127.0.0.1:8000/" are same. This is the domain name.
 # But the urls with endpoints "shiva" and "shiva/" are different.
 # urls "127.0.0.1:8000/shiva" and "127.0.0.1:8000/shiva/" are different. They are not the same urls.
 # urls "127.0.0.1:8000/{empty string}" and "127.0.0.1:8000/{empty string}/" are different.
