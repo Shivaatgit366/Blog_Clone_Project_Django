@@ -75,6 +75,9 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     # if we are using the form, then mention the "form_class" as shown below.
     form_class = PostForm
 
+
+    # an object called "form" is created by django itself using "form_class/model form."
+    # It has "author" field, that author should be same as the "request sending author."
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
@@ -119,6 +122,8 @@ class DraftListView(LoginRequiredMixin, ListView):
 
     # we can use the in-built function to modify the properties. QuerySet function gives the "cursor" as the output.
     # Cursor means a "list of objects". By putting "filter" function we get the list of objects.
+    # After getting the list of objects, put a where/filter clause.
+    # Select only those post objects which have the "author name" equal to the "requesting user".
     def get_queryset(self):
         return Post.objects.filter(published_date__isnull=True,
         author = self.request.user).order_by("-created_date")
