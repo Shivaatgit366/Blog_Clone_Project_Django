@@ -75,8 +75,8 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     # if we are using the form, then mention the "form_class" as shown below.
     form_class = PostForm
 
-    # an object called "form" is created by django itself using "form_class/model form."
-    # It has "author" field, that author should be same as the "request sending author."
+    # an object called "form" is created by django itself using "form_class/model form".
+    # It has "author" field, that author should be same as the "request sending author".
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
