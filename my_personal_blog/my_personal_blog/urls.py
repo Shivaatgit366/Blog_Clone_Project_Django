@@ -35,7 +35,11 @@ urlpatterns = [
 ]
 
 
-# Note: We have used CBTs for login and logout in this example.
 # We have used "LoginView" and "LogoutView" classes for the login and logout.
-# Whenever we use CBTs for login, we should create a template with directory as "registration/login.html".
 # Form object called "form" will be created by django.
+
+# Note:
+# If we use "LoginView", then we should create "registration/login.html" template file. It redirects to settings.LOGIN_REDIRECT_URL.
+# If we don't want to call the template "registration/login.html", then we should pass the template_name in the "as_view" method in urls.py file.
+
+# If we use "LogoutView", then we should create "registration/logged_out.html" template file. This page is the thank you page. After the logout, user will be redirected to this page.
