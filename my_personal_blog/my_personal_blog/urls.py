@@ -43,3 +43,5 @@ urlpatterns = [
 # If we don't want to call the template "registration/login.html", then we should pass the template_name in the "as_view" method in urls.py file.
 
 # If we use "LogoutView", then we should create "registration/logged_out.html" template file. This page is the thank you page. After the logout, user will be redirected to this page.
+# If we don't create the template "registration/logged_out.html", then "LogoutView" redirects the user to home page.
+
