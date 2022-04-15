@@ -47,6 +47,6 @@ urlpatterns = [
 # If we don't want to create the template "registration/logged_out.html", then we can give settings.LOGOUT_REDIRECT_URL to redirect the user.
 
 
-# Note:- For "login" we need 2 things; they are "login template page" and "redirect page".
+# Note:-
+# For "login" we need 2 things; they are "login template page" and "redirect page".
 # For "logout" we need only 1 thing; just "redirect page"/"thank you page" is enough.
-
