@@ -44,4 +44,9 @@ urlpatterns = [
 
 # If we use "LogoutView", then we should create "registration/logged_out.html" template file. This page is the thank you page. After the logout, user will be redirected to this page.
 # If we don't create the template "registration/logged_out.html", then "LogoutView" redirects the user to the home page.
+# If we don't want to create the template "registration/logged_out.html", then we can give settings.LOGOUT_REDIRECT_URL to redirect the user.
+
+
+# Note:- For "login" we need 2 things; they are "login template page" and "redirect page".
+# For "logout" we need only 1 thing; just "redirect page"/"thank you page" is enough.
 
