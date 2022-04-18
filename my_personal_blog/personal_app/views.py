@@ -35,11 +35,11 @@ class PostListView(ListView):  # we are dealing with the CRUD part of the databa
     template_name = "personal_app/post_list.html"
     context_object_name = "list_of_post_objects"
 
-    # Remember this below function returns a "class"/dictionary which is inherited from its ancestors.
-    # this function is already built in by django and it is coming from the ancestor classes.
-    # if we want to change any property, then we can use it.
+    # Remember "queryset" returns a "list" of objects.
+    # Queryset is inherited from its ancestor classes.
+    # "get_queryset" function is present already in the table/class. If we want to change any property of the table/class, then we can use it.
     def get_queryset(self):
-        dict = super().get_queryset()
+        queryset_list = super().get_queryset()
         # "order_by" usually sorts the data in the ascending order, that means oldest "blog" will come first.
         # so, we should simply put "-" sign so that db sorts the records in the descending order and we get latest "blog" in the first record.
         # "__" used for custom lookups. These lookups are used to put the constraints on a field/column. "lte" means less than or equal to.
